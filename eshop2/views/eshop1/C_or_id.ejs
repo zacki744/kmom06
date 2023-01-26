@@ -1,0 +1,212 @@
+<%- include("header", {title: title}); %>
+<head>
+<style>
+    .updateLink{
+        color: blue;
+    }
+</style>
+</head>
+<h1><i>these are all the produkt sorted by category</i></h1>
+
+<div class="Koffiem">
+<h2>Coffie Mugs</h2>
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>Description  |</th>
+        <th>amount  |</th>
+        <th>price  |</th>
+        <th>Action</th>
+    </tr>
+<% for (const row of res1) { %>
+    <tr>
+        <td><%= row.produktKod %></td>
+        <td><%= row.namn %></td>
+        <td><%= row.kort_beskrivning %></td>
+        <td><%= row.antal %></td>
+        <td><%= row.pris %></td>
+        <td>
+            <input type="number" id="quantity_<%= row.produktKod %>" name="quantity" min="1" max="<%= row.antal %>">
+        <td>
+            <button onclick="myFunction('<%= row.produktKod %>', '<%= row.namn %>', '<%= row.antal %>')">Add to Cart</button>
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+<div class="Koffie">
+<h2>Coffie</h2>
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>Description  |</th>
+        <th>amount  |</th>
+        <th>price  |</th>
+        <th>Action</th>
+    </tr>
+<% for (const row of res2) { %>
+    <tr>
+        <td><%= row.produktKod %></td>
+        <td><%= row.namn %></td>
+        <td><%= row.kort_beskrivning %></td>
+        <td><%= row.antal %></td>
+        <td><%= row.pris %></td>
+        <td>
+            <input type="number" id="quantity_<%= row.produktKod %>" name="quantity" min="1" max="<%= row.antal %>">
+        </td>
+        <td>
+            <button onclick="myFunction('<%= row.produktKod %>', '<%= row.namn %>', '<%= row.antal %>')">Add to Cart</button>
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+<div class="misc">
+<h2>Other produkts</h2>
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>Description  |</th>
+        <th>amount  |</th>
+        <th>price  |</th>
+        <th>Action</th>
+    </tr>
+<% for (const row of res3) { %>
+    <tr>
+        <td><%= row.produktKod %></td>
+        <td><%= row.namn %></td>
+        <td><%= row.kort_beskrivning %></td>
+        <td><%= row.antal %></td>
+        <td><%= row.pris %></td>
+        <td>
+            <input type="number" id="quantity_<%= row.produktKod %>" name="quantity" min="1" max="<%= row.antal %>">
+        </td>
+        <td>
+            <button onclick="myFunction('<%= row.produktKod %>', '<%= row.namn %>', '<%= row.antal %>')">Add to Cart</button>
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+<br>
+<button id="clear-cart">Clear cart</button>
+<br>
+<br>
+<div id="local-storage-container" method="post"></div>
+<form method="post">
+    <label for="data"style="display:none;"></label>
+    <input id="data" type="text" name="data" style="display:none;"><br>
+    <input type="submit" value="Submit">
+</form>
+<br>
+<p>
+    <a href="index">Index</a>
+</p>
+<script>
+    // Get cart from local storage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];    
+    const clearCartButton = document.getElementById("clear-cart");
+    document.addEventListener("DOMContentLoaded", displayLocalStorage);
+
+    window.onload = function() {
+        localStorage.clear();
+        cart = [];
+        cart = JSON.parse(localStorage.getItem("cart")) || [];  
+        displayLocalStorage();
+    }
+
+    function myFunction(arg1, arg2, arg3) {
+        // Get quantity from input field
+        const quantity = document.getElementById("quantity_" + arg1).value;
+        
+        // Create item object
+        const item = { id: arg1, namn: arg2, antal: arg3 - quantity, quantity: quantity };
+        // Add item to cart
+        cart.push(item);
+        
+        // Update local storage
+        localStorage.setItem("cart", JSON.stringify(cart));
+        // Update cart count on webpage
+        displayLocalStorage();
+    }
+
+    clearCartButton.addEventListener("click", function() {
+        localStorage.clear();
+        cart = [];
+        cart = JSON.parse(localStorage.getItem("cart")) || [];  
+        displayLocalStorage();
+    });
+
+    function displayLocalStorage() {
+        const container = document.getElementById("local-storage-container");
+        container.innerHTML = "";
+      
+        // Create table element
+        const table = document.createElement("table");
+      
+        // Create table header
+        const headerRow = document.createElement("tr");
+        const headerCell1 = document.createElement("th");
+        headerCell1.textContent = "id";
+        const headerCell2 = document.createElement("th");
+        headerCell2.textContent = "namn";
+        const headerCell3 = document.createElement("th");
+        headerCell3.textContent = "antal";
+        const headerCell4 = document.createElement("th");
+        headerCell4.textContent = "quantity";
+        headerRow.appendChild(headerCell1);
+        headerRow.appendChild(headerCell2);
+        headerRow.appendChild(headerCell3);
+        headerRow.appendChild(headerCell4);
+        table.appendChild(headerRow);
+      
+        // Get the JSON string from local storage
+        const storageValue = JSON.parse(localStorage.getItem("cart"));
+      
+        // Iterate over the array of objects
+        storageValue.forEach(function(item) {
+            // Create table row
+            const row = document.createElement("tr");
+      
+            // Create table cells
+            const cell1 = document.createElement("td");
+            cell1.textContent = item.id;
+            const cell2 = document.createElement("td");
+            cell2.textContent = item.namn;
+            const cell3 = document.createElement("td");
+            cell3.textContent = item.antal;
+            const cell4 = document.createElement("td");
+            cell4.textContent = item.quantity;
+
+            // Append cells to row
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            row.appendChild(cell3);
+            row.appendChild(cell4);
+
+            // Append row to table
+            table.appendChild(row);
+            StoreInForm();
+        });
+    container.appendChild(table);
+    }
+
+    function StoreInForm() {
+        // Get the data from local storage
+        const data = JSON.parse(localStorage.getItem("cart"));
+        
+        // Create a request body
+        const body = JSON.stringify({data});
+        console.log(body);
+        // store the data in the form
+        document.getElementById("data").value = body;
+    }
+
+</script>
+<%- include("footer"); %>

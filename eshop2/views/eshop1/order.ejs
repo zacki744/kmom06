@@ -1,0 +1,41 @@
+<%- include("header", {title: title}); %>
+<head>
+<style>
+    .updateLink{
+        color: blue;
+    }
+</style>
+</head>
+<h1><i>The order</i></h1>
+
+<div class="Costumers">
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>produkt id  |</th>
+        <th>amount  |</th>
+        <th>mail  |</th>
+    </tr>
+<% for (const row of res) { %>
+    <tr>
+        <td><%= row.id_kund %></td>
+        <td><%= row.Namn %></td>
+        <td><%= row.produktkod %></td>
+        <td><%= row.antal %></td>
+        <td>
+            <a id="<%= row.Kund_id %>" href="customer/Order/<%= row.Kund_id %>"  class="updateLink">Create Order</a>
+
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+
+<p>
+    <a href="index">Index</a>
+</p>
+
+
+<%- include("footer"); %>

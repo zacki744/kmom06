@@ -1,0 +1,63 @@
+<%- include("header", {title: title}); %>
+<head>
+    <p id="cart" style="display:none"><%= res1 %></p>
+<style>
+    .updateLink{
+        color: blue;
+    }
+</style>
+</head>
+<h1><i>The costumers</i></h1>
+
+<div class="Costumers">
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>adres  |</th>
+        <th>tel  |</th>
+        <th>mail  |</th>
+    </tr>
+<% for (const row of res) { %>
+    <tr>
+        <td><%= row.Kund_id %></td>
+        <td><%= row.namn %></td>
+        <td><%= row.adres %></td>
+        <td><%= row.tel %></td>
+        <td><%= row.mail %></td>
+        <td>
+            <a id="<%= row.Kund_id %>" href="customer/Order/<%= row.Kund_id %>"  class="updateLink">Create Order</a>
+
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+
+<p>
+    <a href="index">Index</a>
+</p>
+
+<script>
+    window.onload = function() {
+        let table = JSON.parse(document.getElementById("cart").innerHTML);
+        console.log(table);
+        for (let i = 0; i < table.length; i++) {
+            let id = table[i].id_kund;
+            console.log(id);
+            try {
+                let linkElement = document.getElementById(id);
+                linkElement.innerHTML = "Order";
+                linkElement.style.color = "rgb(32, 155, 48)";
+                let newHref = "Order/" + id;
+                linkElement.setAttribute("href", newHref);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    } 
+</script>
+
+
+<%- include("footer"); %>

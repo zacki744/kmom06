@@ -1,0 +1,102 @@
+<%- include("header", {title: title}); %>
+<head>
+<style>
+    .updateLink{
+        color: blue;
+    }
+</style>
+</head>
+<h1><i>these are all the produkt sorted by category</i></h1>
+
+<div class="Koffiem">
+<h2>Coffie Mugs</h2>
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>Description  |</th>
+        <th>amount  |</th>
+        <th>price  |</th>
+        <th>Action</th>
+    </tr>
+<% for (const row of res1) { %>
+    <tr>
+        <td><%= row.produktKod %></td>
+        <td><%= row.namn %></td>
+        <td><%= row.kort_beskrivning %></td>
+        <td><%= row.antal %></td>
+        <td><%= row.pris %></td>
+        <td>
+            <a href="update/Coffee_Mugg/<%= row.produktKod %>" class="updateLink">Update</a>
+        </td>
+        <td>
+            <a href="delete/Coffee_Mugg/<%= row.produktKod %>" class="updateLink">Delete</a>
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+<div class="Koffie">
+<h2>Coffie</h2>
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>Description  |</th>
+        <th>amount  |</th>
+        <th>price  |</th>
+        <th>Action</th>
+    </tr>
+<% for (const row of res2) { %>
+    <tr>
+        <td><%= row.produktKod %></td>
+        <td><%= row.namn %></td>
+        <td><%= row.kort_beskrivning %></td>
+        <td><%= row.antal %></td>
+        <td><%= row.pris %></td>
+        <td>
+            <a href="update/Coffee/<%= row.produktKod %>" class="updateLink">Update</a>
+        </td>
+        <td>
+            <a href="delete/Coffee/<%= row.produktKod %>" class="updateLink">Delete</a>
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+<div class="misc">
+<h2>Other produkts</h2>
+<br>
+<table>
+    <tr>
+        <th> Id  |</th>
+        <th>Name  |</th>
+        <th>Description  |</th>
+        <th>amount  |</th>
+        <th>price  |</th>
+        <th>Action</th>
+    </tr>
+<% for (const row of res3) { %>
+    <tr>
+        <td><%= row.produktKod %></td>
+        <td><%= row.namn %></td>
+        <td><%= row.kort_beskrivning %></td>
+        <td><%= row.antal %></td>
+        <td><%= row.pris %></td>
+        <td>
+            <a href="update/Misc/<%= row.produktKod %>" class="updateLink">Update</a>
+        </td>
+        <td>
+            <a href="delete/Misc/<%= row.produktKod %>" class="updateLink">Delete</a>
+        </td>
+    </tr>
+<% }; %>
+</table>
+</div>
+<p>
+    <a href="index">Index</a>
+</p>
+
+<%- include("footer"); %>

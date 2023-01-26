@@ -1,0 +1,34 @@
+<%- include("header", {title: title}); %>
+<head>
+    <style>
+        .conteiner{
+            border-radius: 25px;
+            position:relative;
+            padding: 1em;
+            background-color: rgb(29, 44, 90);
+        }
+    </style>
+</head>
+<h1>Delete entery</h1>
+<div class="conteiner">
+    <form method="post">
+        <label for="f_produktKod"> Produkt id</label><br>
+        <input id="f_produktKod" type="number" name="f_produktKod" value="<%= eshop[0].produktKod %>" readonly><br>
+
+        <label for="f_pris">Price</label><br>
+        <input type="number" name="f_pris" value="<%= eshop[0].pris %>" readonly><br> 
+
+        <label for="f_namn">Name of product</label><br>
+        <input type="text" name="f_namn" value="<%= eshop[0].namn %>" readonly><br>
+
+        <label for="f_kort_beskrivning">Discription</label><br>
+        <input type="text" name="f_kort_beskrivning" value="<%= eshop[0].kort_beskrivning %>" readonly><br>   
+
+        <label for="f_antal">Amount</label><br>
+        <input type="number" name="f_antal" value="<%= eshop[0].antal %>" readonly><br><br>
+        <input type="submit" value="Delete">
+
+    </form>
+</div>
+<br>
+<%- include("footer"); %>

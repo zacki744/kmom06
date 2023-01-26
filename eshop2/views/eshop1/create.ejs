@@ -1,0 +1,41 @@
+<%- include("header", {title: title}); %>
+<head>
+    <style>
+        .conteiner{
+            border-radius: 25px;
+            position:relative;
+            padding: 1em;
+            background-color: rgb(29, 44, 90);
+        }
+    </style>
+</head>
+<h1>Create entery</h1>
+<div class="conteiner">
+    <form method="post">
+        <label for="f_produkt_kategori">Product Category: </label><br>
+        <select id="produkt_kategori" name="f_produkt_kategori">
+            <option value="kaffe">coffee</option>
+            <option value="kaffe_mugg">coffee mugg</option>
+            <option value="misc"> Other</option>
+        </select><br>
+
+        <label for="f_produktKod"> Produkt id</label><br>
+        <input id="f_produktKod" type="number" name="f_produktKod"><br>
+
+        <label for="f_pris">Price</label><br>
+        <input type="number" name="f_pris"><br> 
+
+        <label for="f_namn">Name of product</label><br>
+        <input type="text" name="f_namn"><br>
+
+        <label for="f_kort_beskrivning">Discription</label><br>
+        <input type="text" name="f_kort_beskrivning"><br>   
+
+        <label for="f_antal">Amount</label><br>
+        <input type="number" name="f_antal"><br><br>
+        <input type="submit" value="Submit">
+
+    </form>
+</div>
+<br>
+<%- include("footer"); %>
